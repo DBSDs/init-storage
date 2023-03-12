@@ -37,6 +37,7 @@ const { getLocalStorageItem } = setInitStorage(
   session: {}
 )
 
+console.log(getLocalStorageItem('token'))       // null
 console.log(getLocalStorageItem('token', true)) // "1"
 ```
 

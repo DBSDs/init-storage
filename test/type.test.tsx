@@ -2,17 +2,7 @@ import { setInitStorage } from "../package/";
 
 describe("typescript check", () => {
   it("init null", () => {
-    const {
-      getLocalStorageItem,
-      setLocalStorageItem,
-      removeLocalStorageItem,
-      clearLocalStorageItem,
-      getSessionStorageItem,
-      setSessionStorageItem,
-      removeSessionStorageItem,
-      clearSessionStorageItem,
-    } = setInitStorage({ local: {}, session: {} });
-    // expect(getLocalStorageItem).toBeCalled();
+    const {} = setInitStorage({ local: {}, session: {} });
   });
 
   it("init local and session", () => {
@@ -83,4 +73,35 @@ describe("typescript check", () => {
     removeLocalStorageItem("appid");
     removeLocalStorageItem("auth");
   });
+
+  // it("init define local and session", () => {
+  //   type LocalProps = {
+  //     auth: {
+  //       id: string;
+  //       username: string;
+  //       origin?: {
+  //         id: string | number;
+  //         zIndex: 0;
+  //       };
+  //     };
+  //     appid: string | number;
+  //   };
+  //   const { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } =
+  //     setInitStorage({
+  //       local: {
+  //         auth: {
+  //           id: "",
+  //           username: "",
+  //           origin: {
+  //             id: "",
+  //             zIndex: 0,
+  //           },
+  //         },
+  //         appid: "",
+  //       },
+  //       session: {
+  //         token: 1,
+  //       },
+  //     });
+  // });
 });

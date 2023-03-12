@@ -1,12 +1,12 @@
 export const setInitStorage = <
-  LocalKey extends string,
   LocalStroage extends any,
-  SessionKey extends string,
-  SessionStroage extends any
+  SessionStroage extends any,
+  LocalKey extends string,
+  SessionKey extends string
 >(
   init: {
-    local: { [key in LocalKey]: LocalStroage };
-    session: { [key in SessionKey]: SessionStroage };
+    local: Record<LocalKey, LocalStroage>;
+    session: Record<SessionKey, SessionStroage>;
   },
   option: { defaultUseInit: boolean } = {
     defaultUseInit: false,
@@ -15,15 +15,13 @@ export const setInitStorage = <
   let INIT_LOCAL_STORAGE = init.local;
   let INIT_SESSION_STORAGE = init.session;
   const getStorageItemFunction = <
+    Stroage extends any,
     Method extends "get" | "set" | "remove" | "clear",
-    Key extends string,
-    Stroage extends any
+    Key extends string
   >(
     object: Storage,
     action: Method,
-    INIT_STORAGE: {
-      [key in Key]: Stroage;
-    }
+    INIT_STORAGE: Record<Key, Stroage>
   ) => {
     type LocalStoroages = keyof typeof INIT_STORAGE;
     const funcMap = {
