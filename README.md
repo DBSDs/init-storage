@@ -1,6 +1,6 @@
 
 ## 为何而生
-你是不是受够了`Storage.getItem(key: string): string | null`没有类型提示的日子
+你是不是受够了`Storage.getItem(key: string): string | null`没有类型提示的日子     
 你是不是需要一个在应用中更加清晰可见的缓存列表
 * {
   * token: number

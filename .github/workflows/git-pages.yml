@@ -1,6 +1,12 @@
 name: Test
 on: [push]
 jobs:
+  install:
+    runs-on: windows-latest # The first job utilizes windows-latest
+    steps:
+      - name: Install
+        run: |
+          npm install
   build:
     runs-on: windows-latest # The first job utilizes windows-latest
     steps:
