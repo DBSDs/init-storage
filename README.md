@@ -1,7 +1,7 @@
 
 ## 为何而生
 你是不是受够了`Storage.getItem(key: string): string | null`没有类型提示的日子     
-你是不是需要一个在应用中更加清晰可见的缓存列表
+你是不是需要一个在应用中集成一个清晰可见的存储空间列表
 * {
   * token: number
   * info: { id: string, pwd: string}
@@ -40,7 +40,9 @@ const { getLocalStorageItem } = setInitStorage(
 console.log(getLocalStorageItem('token'))       // null
 console.log(getLocalStorageItem('token', true)) // "1"
 ```
+**内部自动通过关键字`typeof`进行类型推断，当你认为自动推断的类型有误时，使用`as`关键字可以帮助进行类型拓展**
 
+下面是可以调用的方法:
 | 方法                      | 说明               | 类 型                                                               | 
 |--------------------------|--------------------|--------------------------------------------------------------------|
 | getLocalStorageItem      | 获取本地存储空间      | (item: 'aa' \| 'bb' \| '...',  ifNullIsGetInit: boolean) => void   |
@@ -52,11 +54,13 @@ console.log(getLocalStorageItem('token', true)) // "1"
 | removeSessionStorageItem | 移除会话存储空间(某键) | (item: 'aa' \| 'bb' \| '...') => void                              | 
 | clearSessionStorageIte   | 清空会话存储空间      | (item: 'aa' \| 'bb' \| '...') => void                              |
 
-同时`setInitStorage(INIT, option)`还有用可配置项
+同时`setInitStorage(INIT, option)`还有用可配置项，下面是一些有关配置项：
 
 | 参数            | 说明                                | 类 型       | 默认值                           |
 |----------------|-------------------------------------|------------|---------------------------------|
 | defaultUseInit | 返回的方法中ifNullIsGetInit参数的默认值 |  boolean   | false (如果存储中没有就返回null)    | 
+
+
 ## 示例
 
 * [React](https://codesandbox.io/s/init-storage-react-fgkfhp?file=/src/App.tsx)
