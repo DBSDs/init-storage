@@ -1,0 +1,10 @@
+name: Test
+on: [push]
+jobs:
+  build:
+    runs-on: windows-latest # The first job utilizes windows-latest
+    steps:
+      - name: Test
+        run: |
+          npm run test
+  

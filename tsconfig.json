@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["DOM", "es2020"],
+  },
+  "include": ["package", "website"],
+  "paths": {
+    "dist/*": ["dist/*"],
+    "~/*": ["./*"]
+  },
+  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"],
+}
