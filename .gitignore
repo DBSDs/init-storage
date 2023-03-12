@@ -4,3 +4,4 @@ site/node_modules
 
 # compiled output
 dist
+stats.html
