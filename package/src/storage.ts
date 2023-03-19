@@ -1,12 +1,12 @@
+type OperationMethod = "get" | "set" | "remove" | "clear";
+
 export const setInitStorage = <
-  LocalStroage extends any,
-  SessionStroage extends any,
-  LocalKey extends string,
-  SessionKey extends string
+  LocalStroage extends { [key: string]: any },
+  SessionStroage extends { [key: string]: any }
 >(
   init: {
-    local: Record<LocalKey, LocalStroage>;
-    session: Record<SessionKey, SessionStroage>;
+    local: LocalStroage;
+    session: SessionStroage;
   },
   option: { defaultUseInit: boolean } = {
     defaultUseInit: false,
@@ -15,29 +15,25 @@ export const setInitStorage = <
   let INIT_LOCAL_STORAGE = init.local;
   let INIT_SESSION_STORAGE = init.session;
   const getStorageItemFunction = <
-    Stroage extends any,
-    Method extends "get" | "set" | "remove" | "clear",
-    Key extends string
+    InitStorage extends { [key: string]: any },
+    Method extends OperationMethod
   >(
     object: Storage,
     action: Method,
-    INIT_STORAGE: Record<Key, Stroage>
+    init_storage: InitStorage
   ) => {
-    type LocalStoroages = keyof typeof INIT_STORAGE;
     const funcMap = {
-      get: <T extends LocalStoroages, GetExtends extends boolean>(
+      get: <T extends keyof InitStorage, GetExtends extends boolean>(
         item: T,
         ifNullIsGetInit?: GetExtends
-      ): GetExtends extends true
-        ? (typeof INIT_STORAGE)[T]
-        : (typeof INIT_STORAGE)[T] | null => {
+      ): GetExtends extends true ? InitStorage[T] : InitStorage[T] | null => {
         const isGetInit =
           ifNullIsGetInit === undefined
             ? option.defaultUseInit
             : ifNullIsGetInit;
-        let local: (typeof INIT_STORAGE)[T] = null;
+        let local: any = null;
         if (typeof window !== "undefined") {
-          const item_string = object.getItem(item);
+          const item_string = object.getItem(item as string);
           if (item_string) {
             try {
               local = JSON.parse(item_string);
@@ -45,22 +41,22 @@ export const setInitStorage = <
               console.log(err);
             }
           } else if (isGetInit) {
-            local = INIT_STORAGE[item];
+            local = init_storage[item];
           }
         }
         return local;
       },
-      set: <T extends LocalStoroages>(
-        key: T,
-        value: (typeof INIT_STORAGE)[T]
+      set: <T extends keyof InitStorage>(
+        item: T,
+        value: (typeof init_storage)[T]
       ): void => {
         if (typeof window !== "undefined") {
-          object.setItem(key, JSON.stringify(value));
+          object.setItem(item as string, JSON.stringify(value));
         }
       },
-      remove: <T extends LocalStoroages>(item: T): void => {
+      remove: <T extends keyof InitStorage>(item: T): void => {
         if (typeof window !== "undefined") {
-          object.removeItem(item);
+          object.removeItem(item as string);
         }
       },
       clear: (): void => {

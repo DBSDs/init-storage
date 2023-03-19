@@ -20,15 +20,17 @@ describe("typescript check", () => {
           username: "",
         },
         appid: "",
+        1: 2,
       },
       session: {
         appid: "",
       },
     });
 
-    getLocalStorageItem("appid");
-    getLocalStorageItem("auth");
-    setLocalStorageItem("appid", "s");
+    const appid: string = getLocalStorageItem("appid", true);
+    const auth: { id: string; username: string } | null =
+      getLocalStorageItem("auth");
+    setLocalStorageItem("appid", "2");
     setLocalStorageItem("auth", {
       id: "",
       username: "",
@@ -73,35 +75,4 @@ describe("typescript check", () => {
     removeLocalStorageItem("appid");
     removeLocalStorageItem("auth");
   });
-
-  // it("init define local and session", () => {
-  //   type LocalProps = {
-  //     auth: {
-  //       id: string;
-  //       username: string;
-  //       origin?: {
-  //         id: string | number;
-  //         zIndex: 0;
-  //       };
-  //     };
-  //     appid: string | number;
-  //   };
-  //   const { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } =
-  //     setInitStorage({
-  //       local: {
-  //         auth: {
-  //           id: "",
-  //           username: "",
-  //           origin: {
-  //             id: "",
-  //             zIndex: 0,
-  //           },
-  //         },
-  //         appid: "",
-  //       },
-  //       session: {
-  //         token: 1,
-  //       },
-  //     });
-  // });
 });
