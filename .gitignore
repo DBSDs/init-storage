@@ -5,3 +5,5 @@ site/node_modules
 # compiled output
 dist
 stats.html
+coverage
+.DS_Store

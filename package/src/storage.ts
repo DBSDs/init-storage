@@ -1,21 +1,27 @@
 type OperationMethod = "get" | "set" | "remove" | "clear";
 
+type OptionProps = {
+  defaultUseInit: boolean;
+};
+
+const INIT_OPTIONS = {
+  defaultUseInit: false,
+};
+
 export const setInitStorage = <
-  LocalStroage extends { [key: string]: any },
-  SessionStroage extends { [key: string]: any }
+  LocalStroage extends Record<string, any>,
+  SessionStroage extends Record<string, any>
 >(
   init: {
     local: LocalStroage;
     session: SessionStroage;
   },
-  option: { defaultUseInit: boolean } = {
-    defaultUseInit: false,
-  }
+  option: OptionProps = INIT_OPTIONS
 ) => {
   let INIT_LOCAL_STORAGE = init.local;
   let INIT_SESSION_STORAGE = init.session;
   const getStorageItemFunction = <
-    InitStorage extends { [key: string]: any },
+    InitStorage extends Record<string, any>,
     Method extends OperationMethod
   >(
     object: Storage,
@@ -31,14 +37,15 @@ export const setInitStorage = <
           ifNullIsGetInit === undefined
             ? option.defaultUseInit
             : ifNullIsGetInit;
-        let local: any = null;
+        let local = null;
         if (typeof window !== "undefined") {
           const item_string = object.getItem(item as string);
           if (item_string) {
             try {
               local = JSON.parse(item_string);
             } catch (err) {
-              console.log(err);
+              console.log(1);
+              console.error(`${err} --from \`init-stoarge\``);
             }
           } else if (isGetInit) {
             local = init_storage[item];
