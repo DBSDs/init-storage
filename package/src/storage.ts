@@ -75,43 +75,47 @@ export const setInitStorage = <
     return funcMap[action];
   };
 
+  const LOCAL = typeof window !== "undefined" ? localStorage : ({} as Storage);
+  const SESSION =
+    typeof window !== "undefined" ? sessionStorage : ({} as Storage);
+
   const getLocalStorageItem = getStorageItemFunction(
-    localStorage,
+    LOCAL,
     "get",
     INIT_LOCAL_STORAGE
   );
   const setLocalStorageItem = getStorageItemFunction(
-    localStorage,
+    LOCAL,
     "set",
     INIT_LOCAL_STORAGE
   );
   const removeLocalStorageItem = getStorageItemFunction(
-    localStorage,
+    LOCAL,
     "remove",
     INIT_LOCAL_STORAGE
   );
   const clearLocalStorageItem = getStorageItemFunction(
-    localStorage,
+    LOCAL,
     "clear",
     INIT_LOCAL_STORAGE
   );
   const getSessionStorageItem = getStorageItemFunction(
-    sessionStorage,
+    SESSION,
     "get",
     INIT_SESSION_STORAGE
   );
   const setSessionStorageItem = getStorageItemFunction(
-    sessionStorage,
+    SESSION,
     "set",
     INIT_SESSION_STORAGE
   );
   const removeSessionStorageItem = getStorageItemFunction(
-    sessionStorage,
+    SESSION,
     "remove",
     INIT_SESSION_STORAGE
   );
   const clearSessionStorageItem = getStorageItemFunction(
-    sessionStorage,
+    SESSION,
     "clear",
     INIT_SESSION_STORAGE
   );
