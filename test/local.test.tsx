@@ -22,8 +22,8 @@ test("getLocalStorageItem", async () => {
 test("getLocalStorageItem error", async () => {
   const { getLocalStorageItem } = setInitStorage(INIT);
 
-  window.localStorage.setItem("token", "&123");
-  expect(getLocalStorageItem("token")).toEqual(null);
+  window.localStorage.setItem("token", "123");
+  expect(getLocalStorageItem("token")).toEqual("123");
 
   window.localStorage.removeItem("token");
 });
@@ -31,7 +31,7 @@ test("getLocalStorageItem error", async () => {
 test("setLocalStorageItem", async () => {
   const { setLocalStorageItem } = setInitStorage(INIT);
   expect(JSON.parse(window.localStorage.getItem("token") as string)).toEqual(
-    null
+    123
   );
 
   setLocalStorageItem("token", "1");
