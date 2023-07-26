@@ -1,6 +1,6 @@
 {
   "name": "init-storage",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "为应用中的storage提供丝滑的typescript支持",
   "main": "dist/init-storage.min.js",
   "module": "dist/init-storage.min.js",

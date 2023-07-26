@@ -44,8 +44,7 @@ export const setInitStorage = <
             try {
               local = JSON.parse(item_string);
             } catch (err) {
-              console.log(1);
-              console.error(`${err} --from \`init-stoarge\``);
+              local = item_string;
             }
           } else if (isGetInit) {
             local = init_storage[item];
